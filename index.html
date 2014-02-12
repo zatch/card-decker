@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Card Decker</title>
+    
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+        
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="https://api.trello.com/1/client.js?key=ab1f04a513e61dcfa0fed97a14a8b816"></script>
+    
+    <script type="text/javascript" src="js/inheritance.js"></script>
+    <script type="text/javascript" src="js/events.js"></script>
+    <script type="text/javascript" src="js/event-emitter.js"></script>
+    <script type="text/javascript" src="js/deck.js"></script>
+    
+    <script type="text/javascript" src="js/app.js"></script>
+    
+    <script type="text/javascript">
+		$(document).ready(function(e) {
+			// Initialize app
+			App();
+		});
+    </script>
+</head>
+
+<body>
+    
+<div id="loggedout">
+    <a id="connectLink" href="#">Connect To Trello</a>
+</div>
+
+<div id="loggedin">
+    <div id="header">
+        <div id="user-profile">
+            Logged in to as <span id="fullName"></span> 
+            <a id="disconnect" href="#">Log Out</a>
+        </div>
+        <div id="option-input">
+            <div id="board-selection">
+                <label for="board-select">Board:</label>
+                <select id="board-select" name="board-select"></select>
+            </div>
+            <div id="list-selection">
+                <label for="list-select">List:</label>
+                <select id="list-select" name="list-select"></select>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="deck-container"></div>
+
+</body>
+</html>
