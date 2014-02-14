@@ -41,15 +41,18 @@ body {
     margin: 10px;
 }
 
-.draw-pile { 
-    display: block; 
-    position: relative;
+.deck { 
+    float: left;
     width: 135px;
     height: 210px;
     margin: 20px;
     background: #cccccc;
     border: 1px solid #333333;
     cursor: pointer;
+}
+
+.deck select {
+    width: 100%;
 }
 
 .flop { 
