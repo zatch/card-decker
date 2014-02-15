@@ -12,6 +12,7 @@
     <script type="text/javascript" src="js/inheritance.js"></script>
     <script type="text/javascript" src="js/events.js"></script>
     <script type="text/javascript" src="js/event-emitter.js"></script>
+    <script type="text/javascript" src="js/trello-io.js"></script>
     <script type="text/javascript" src="js/deck.js"></script>
     
     <script type="text/javascript" src="js/app.js"></script>
@@ -37,7 +38,13 @@
             <a id="disconnect" href="#">Log Out</a>
         </div>
         <div id="option-input">
-            <button id="new-deck-btn">Add Deck</button>
+			<div id="new-deck-ui">
+				<div id="new-deck-dialog">
+					<select id='board-select'></select>
+					<select id='list-select'></select>
+					<button id="new-deck-btn">Add Deck</button>
+				</div>
+			</div>
         </div>
         <div class="clear"></div>
     </div>
