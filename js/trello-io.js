@@ -13,15 +13,17 @@ var TrelloIO = EventEmitter.extend({
             success: $.proxy(this.onAuthorize, this)
         });
         
+        
+        var self = this;
         $("#connectLink")
         .click(function(){
             Trello.authorize({
                 type: "popup",
-                success: onAuthorize
+                success: $.proxy(self.onAuthorize, self)
             });
         });
         
-        $("#disconnect").click(this.logout);
+        $("#disconnect").click($.proxy(this.logout, this));
     
 	},
     
