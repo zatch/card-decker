@@ -8,6 +8,12 @@ var Deck = Pile.extend({
 	init: function (cards) {
 		this._super(cards);
 		this._cardsInDeck = this._cards;
+		
+		// TODO: Get rid of this terrible setTimeout!
+		// Triggering this event in init() is preventing me from listening to it right away!
+		setTimeout($.proxy(function() {
+			this._activateCard(this.nextCard());
+		}, this), 500);
 	},
 	
 	nextCard: function() {

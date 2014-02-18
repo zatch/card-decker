@@ -6,12 +6,20 @@ var Card = EventEmitter.extend({
     name: null,
     description: null,
 	_data: null,
+	_owner: null,
+	_container: null,
 	
-	init: function (cardData) {
+	init: function (cardData, owner) {
 		this._super();
 		this.name = cardData.name;
 		this.desc = cardData.desc;
 		this._data = cardData.data;
+		this._owner = owner;
+	},
+	
+	activate: function(container) {
+		this._container = container;
+		this.trigger(Card.ACTIVATED, this);
 	},
     
     handleEvent: function (type, target, data) {
@@ -34,3 +42,4 @@ var Card = EventEmitter.extend({
  * Define constants for Event types.
  */
 Card.CREATED = "cardCreated";
+Card.ACTIVATED = "cardActivated";

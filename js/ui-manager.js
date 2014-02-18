@@ -23,6 +23,9 @@ var UIManager = EventEmitter.extend({
             case PileManager.PILE_CREATED:
                 this._onPileCreated(data);
                 break;
+            case Card.ACTIVATED:
+                this._onCardActivated(data);
+                break;
             // ... other event routing happens here.
             default:
                 throw new Error("Unknown event type, '" + type + "' passed to UI Manager");
@@ -44,7 +47,33 @@ var UIManager = EventEmitter.extend({
 		var $d = $("<div class='deck'></div>")
         .appendTo(this.$decksContainer);
         
-        this.piles.push({pile: eventData, $el: $d});
+		var pile = eventData;
+		var cards = pile.getCards();
+		for (var lcv = 0; lcv < cards.length; lcv++) {
+			cards[lcv].bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
+		}
+		
+        this.piles.push({pile: pile, $el: $d});
+    },
+    
+    _onCardActivated: function(eventData) {
+		var $c = $("<div class='card'></div>");
+		var $cback = $("<div class='back'></div>")
+			.appendTo($c);
+		var $cfront = $("<div class='front'></div>")
+			.appendTo($c);
+		var $cname = $("<div class='back'></div>")
+			.text(eventData.name)
+			.appendTo($cfront);
+		
+		// TODO: Figure out a better way to get a reference to the containing pile.
+		for (var lcv = 0; lcv < this.piles.length; lcv++) {
+			// TODO: Remove ref to private Card _container prop.
+			if (eventData._container === this.piles[lcv].pile) {
+				this.piles[lcv].$el.append($c);
+			}
+		}
+		
     }
 });
 UIManager.ADD_PILE = "uiAddPile";

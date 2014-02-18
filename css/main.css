@@ -51,25 +51,12 @@ body {
     cursor: pointer;
 }
 
-.deck select {
-    width: 100%;
-}
-
-.flop { 
+.card {
     display: block; 
-    position: relative;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #333333;
-}
-
-.flop .card { 
-    display: block; 
-    position: relative;
+    position: absolute;
     width: 135px;
     height: 210px;
-    margin: 20px;
-    background: #cccccc;
+    background: #4385a9;
     border: 1px solid #333333;
 }
 

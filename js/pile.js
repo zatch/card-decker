@@ -28,17 +28,26 @@ var Pile = EventEmitter.extend({
 		return this;
 	},
 	
+	getCards: function() {
+		return this._cards;
+	},
+	
     _buildPile: function(cards) {
 		for (var lcv = 0; lcv < cards.length; lcv++) {
 			var card = cards[lcv];
 			var cf = card.data.frequency ? card.data.frequency : 1;
 			var frequency = cf;
+			card.owner = this;
 			
 			for (var f = 0; f < frequency; f++) {
-				this._cards.push(new Card(card));
+				this._cards.push(new Card(card, this));
 			}
 		}
     },
+	
+	_activateCard: function(card) {
+		card.activate(this);
+	},
     
     handleEvent: function (type, target, data) {
         switch (type) {
