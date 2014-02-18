@@ -3,15 +3,15 @@
 // -----------------------------------------------------------------------------
 var Deck = Pile.extend({
 	
-	_drawpile: null,
-	_inPlay: null,
+	_cardsInDeck: null,
 	
 	init: function (cards) {
 		this._super(cards);
+		this._cardsInDeck = this._cards;
 	},
 	
 	nextCard: function() {
-		return this._drawpile[this._drawpile.length - 1];
+		return this._cardsInDeck[this._cardsInDeck.length - 1];
 	},
     
     handleEvent: function (type, target, data) {

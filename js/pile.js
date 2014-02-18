@@ -3,15 +3,14 @@
 // -----------------------------------------------------------------------------
 var Pile = EventEmitter.extend({
 	
-	_drawpile: null,
-	_inPlay: null,
+	_cards: null,
 	
 	init: function (cards) {
 		this._super();
-		this._drawpile = [];
-		this._inPlay = [];
+		this._cards = [];
 		
 		this._buildPile(cards);
+		this.shuffle();
 		this.trigger(Pile.CREATED, this);
 	},
 	
@@ -23,7 +22,7 @@ var Pile = EventEmitter.extend({
 	 * @ http://jsfromhell.com/array/shuffle [v1.0]
 	 */
 	shuffle: function() {
-		var o = this._drawpile;
+		var o = this._cards;
 		for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x){}
 		this.trigger(Pile.SHUFFLED, this);
 		return this;
@@ -36,11 +35,9 @@ var Pile = EventEmitter.extend({
 			var frequency = cf;
 			
 			for (var f = 0; f < frequency; f++) {
-				this._drawpile.push(new Card(card));
+				this._cards.push(new Card(card));
 			}
 		}
-		
-		this.shuffle();
     },
     
     handleEvent: function (type, target, data) {
