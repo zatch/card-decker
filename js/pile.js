@@ -5,13 +5,26 @@ var Pile = EventEmitter.extend({
 	
 	_cards: null,
 	
-	init: function (cards) {
+	init: function () {
 		this._super();
 		this._cards = [];
 		
-		this._buildPile(cards);
+		//this._buildPile(cards);
 		this.shuffle();
 		this.trigger(Pile.CREATED, this);
+	},
+	
+	addCards: function(cards) {
+		for (var lcv = 0; lcv < cards.length; lcv++) {
+			var card = cards[lcv];
+			var cf = card.data.frequency ? card.data.frequency : 1;
+			var frequency = cf;
+			card.owner = this;
+			
+			for (var f = 0; f < frequency; f++) {
+				this._cards.push(new Card(card, this, [{type: Card.ACTIVATED, handler: $.proxy(this.handleEvent, this)}]));
+			}
+		}
 	},
 	
 	/**
@@ -31,7 +44,7 @@ var Pile = EventEmitter.extend({
 	getCards: function() {
 		return this._cards;
 	},
-	
+	/*
     _buildPile: function(cards) {
 		for (var lcv = 0; lcv < cards.length; lcv++) {
 			var card = cards[lcv];
@@ -40,10 +53,10 @@ var Pile = EventEmitter.extend({
 			card.owner = this;
 			
 			for (var f = 0; f < frequency; f++) {
-				this._cards.push(new Card(card, this));
+				this._cards.push(new Card(card, this, [{type: Card.ACTIVATED, handler: $.proxy(this.handleEvent, this)}]));
 			}
 		}
-    },
+    },*/
 	
 	_activateCard: function(card) {
 		card.activate(this);
@@ -51,8 +64,9 @@ var Pile = EventEmitter.extend({
     
     handleEvent: function (type, target, data) {
         switch (type) {
-            case SomeComponent.SOME_EVENT:
-                // Do stuff.
+            case Card.ACTIVATED:
+                // Bubble event.
+				this.trigger(type, target, data);
                 break;
             // ... other event routing happens here.
             default:

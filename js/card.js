@@ -9,8 +9,8 @@ var Card = EventEmitter.extend({
 	_owner: null,
 	_container: null,
 	
-	init: function (cardData, owner) {
-		this._super();
+	init: function (cardData, owner, prebindings) {
+		this._super(prebindings);
 		this.name = cardData.name;
 		this.desc = cardData.desc;
 		this._data = cardData.data;

@@ -48,10 +48,11 @@ var UIManager = EventEmitter.extend({
         .appendTo(this.$decksContainer);
         
 		var pile = eventData;
-		var cards = pile.getCards();
+		pile.bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
+		/*var cards = pile.getCards();
 		for (var lcv = 0; lcv < cards.length; lcv++) {
 			cards[lcv].bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
-		}
+		}*/
 		
         this.piles.push({pile: pile, $el: $d});
     },
