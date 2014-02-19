@@ -138,7 +138,12 @@ EventEmitter = Class.extend({
 		return this;
 	},
     
-    init: function () {
+    init: function (prebindings) {
         this._handlers = {};
+        if (!!prebindings) {
+            for (var lcv = 0; lcv < prebindings.length; lcv++) {
+                this.bind(prebindings[lcv].type, prebindings[lcv].handler);
+            }
+        }
     }
 });
