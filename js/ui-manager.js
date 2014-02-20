@@ -48,22 +48,24 @@ var UIManager = EventEmitter.extend({
         .appendTo(this.$decksContainer);
         
 		var pile = eventData;
-		var cards = pile.getCards();
+		pile.bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
+		/*var cards = pile.getCards();
 		for (var lcv = 0; lcv < cards.length; lcv++) {
 			cards[lcv].bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
-		}
+		}*/
 		
         this.piles.push({pile: pile, $el: $d});
     },
     
     _onCardActivated: function(eventData) {
+		var card = eventData;
 		var $c = $("<div class='card'></div>");
 		var $cback = $("<div class='back'></div>")
 			.appendTo($c);
 		var $cfront = $("<div class='front'></div>")
 			.appendTo($c);
-		var $cname = $("<div class='back'></div>")
-			.text(eventData.name)
+		var $cname = $("<div class='name'></div>")
+			.text(card.name())
 			.appendTo($cfront);
 		
 		// TODO: Figure out a better way to get a reference to the containing pile.
