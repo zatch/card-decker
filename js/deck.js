@@ -5,16 +5,10 @@ var Deck = Pile.extend({
 	
 	_cardsInDeck: null,
 	
-	init: function (cards) {
-		this._super(cards);
+	init: function () {
+		this._super();
 		// TODO: Make this happen during addCards(), make sure this isn't a references to the actual _cards array.
 		this._cardsInDeck = this._cards;
-		
-		// TODO: Get rid of this terrible setTimeout!
-		// Triggering this event in init() is preventing me from listening to it right away!
-		//setTimeout($.proxy(function() {
-		//	this._activateCard(this.nextCard());
-		//}, this), 500);
 	},
 	
 	activate: function() {
