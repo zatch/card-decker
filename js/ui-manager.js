@@ -71,7 +71,7 @@ var UIManager = EventEmitter.extend({
 		// TODO: Figure out a better way to get a reference to the containing pile.
 		for (var lcv = 0; lcv < this.piles.length; lcv++) {
 			// TODO: Remove ref to private Card _container prop.
-			if (eventData._container === this.piles[lcv].pile) {
+			if (eventData.container() === this.piles[lcv].pile) {
 				this.piles[lcv].$el.append($c);
 			}
 		}
