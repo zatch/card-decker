@@ -51,6 +51,17 @@ body {
     cursor: pointer;
 }
 
+.mat { 
+    float: left;
+    min-width: 135px;
+    height: 210px;
+    padding: 20px;
+    margin: 20px;
+    background: #cccccc;
+    border: 1px solid #333333;
+    cursor: pointer;
+}
+
 .card {
     display: block; 
     position: absolute;

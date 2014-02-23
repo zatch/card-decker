@@ -40,6 +40,11 @@ var PileManager = EventEmitter.extend({
 				this.trigger(PileManager.PILE_CREATED, this._piles[this._piles.length - 1]);
 				newPile.activate();
                 break;
+            case "mat":
+				this._piles.push(newPile = new Mat());
+				this.trigger(PileManager.PILE_CREATED, this._piles[this._piles.length - 1]);
+				newPile.activate();
+                break;
             // ... other event routing happens here.
             default:
                 throw new Error("Cannot build unknown pile type, '" + type);
@@ -53,6 +58,10 @@ var PileManager = EventEmitter.extend({
      */
     getPile: function (id) {
         // TODO: Implement PileManager.getPile().
-    }
+    },
+	
+	transferCard: function(card, targetPile) {
+		
+	}
 });
 PileManager.PILE_CREATED = "pileCreated";

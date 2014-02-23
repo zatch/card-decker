@@ -1,23 +1,17 @@
 // -----------------------------------------------------------------------------
-// Deck Class
+// Mat Class
 // -----------------------------------------------------------------------------
-var Deck = Pile.extend({
+var Mat = Pile.extend({
 	
 	_cardsInDeck: null,
 	
 	init: function () {
 		this._super();
-		this.type("deck");
-		// TODO: Make this happen during addCards(), make sure this isn't a references to the actual _cards array.
-		this._cardsInDeck = this._cards;
+		this.type("mat");
 	},
 	
 	activate: function() {
-		this._activateCard(this.nextCard());
-	},
-	
-	nextCard: function() {
-		return this._cardsInDeck[this._cardsInDeck.length - 1];
+		
 	}/*,
     
     handleEvent: function (type, target, data) {
@@ -35,6 +29,4 @@ var Deck = Pile.extend({
 /*
  * Define constants for Event types.
  */
-Deck.CREATED = "deckCreated";
-Deck.SHUFFLED = "deckShuffled";
-Deck.CARD_CREATED = "cardCreated";
+Mat.CREATED = "matCreated";

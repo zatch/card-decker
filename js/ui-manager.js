@@ -4,15 +4,22 @@
 var UIManager = EventEmitter.extend({
 	
     piles: null,
+    $pilesContainer: null,
     $addDeckBtn: null,
-    $decksContainer: null,
 	
 	init: function () {
 		this._super();
         
+        var self = this;
+		
         this.piles = [];
         this.$addDeckBtn = $("#add-deck-btn");
-        this.$decksContainer = $("#decks-container");
+        this.$addMatBtn = $("#add-mat-btn");
+        this.$pilesContainer = $("#piles-container");
+		
+        this.$addMatBtn.unbind("click").click(function() {
+            self.trigger(UIManager.ADD_PILE, {type: "mat"});
+        });
 	},
     
     handleEvent: function (type, target, data) {
@@ -44,15 +51,12 @@ var UIManager = EventEmitter.extend({
     },
     
     _onPileCreated: function(eventData) {
-		var $d = $("<div class='deck'></div>")
-        .appendTo(this.$decksContainer);
-        
 		var pile = eventData;
+		
+		var $d = $("<div class='" + pile.type() + "'></div>")
+        .appendTo(this.$pilesContainer);
+        
 		pile.bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
-		/*var cards = pile.getCards();
-		for (var lcv = 0; lcv < cards.length; lcv++) {
-			cards[lcv].bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
-		}*/
 		
         this.piles.push({pile: pile, $el: $d});
     },
