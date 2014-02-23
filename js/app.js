@@ -3,9 +3,9 @@ function App() {
     var uiMgr = new UIManager();
     var trelloIO = new TrelloIO();
     
-    uiMgr.bind(UIManager.ADD_PILE, pileMgr.handleEvent);
+    uiMgr.bind(UIManager.ADD_PILE, $.proxy(pileMgr.handleEvent, pileMgr));
     
-    trelloIO.bind(TrelloIO.CARDS_READY, uiMgr.handleEvent);
+    trelloIO.bind(TrelloIO.CARDS_READY, $.proxy(uiMgr.handleEvent, uiMgr));
     
-    pileMgr.bind(PileManager.PILE_CREATED, uiMgr.handleEvent);
+    pileMgr.bind(PileManager.PILE_CREATED, $.proxy(uiMgr.handleEvent, uiMgr));
 }
