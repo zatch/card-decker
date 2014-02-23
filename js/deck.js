@@ -37,4 +37,3 @@ var Deck = Pile.extend({
  */
 Deck.CREATED = "deckCreated";
 Deck.SHUFFLED = "deckShuffled";
-Deck.CARD_CREATED = "cardCreated";

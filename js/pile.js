@@ -97,4 +97,3 @@ var Pile = EventEmitter.extend({
  */
 Pile.CREATED = "pileCreated";
 Pile.SHUFFLED = "pileShuffled";
-Pile.CARD_CREATED = "cardCreated";

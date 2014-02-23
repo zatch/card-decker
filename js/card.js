@@ -79,4 +79,3 @@ var Card = EventEmitter.extend({
  */
 Card.CREATED = "cardCreated";
 Card.ACTIVATED = "cardActivated";
-Card.ACTIVATED = "cardActivated";
