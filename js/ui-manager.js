@@ -53,33 +53,64 @@ var UIManager = EventEmitter.extend({
     _onPileCreated: function(eventData) {
 		var pile = eventData;
 		
-		var $d = $("<div class='" + pile.type() + "'></div>")
-        .appendTo(this.$pilesContainer);
-        
+		this._createPileEl(pile).appendTo(this.$pilesContainer);
+		
 		pile.bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
 		
-        this.piles.push({pile: pile, $el: $d});
+		var cards = pile.getCards();
+		for (var lcv = 0; lcv < cards.length; lcv++) {
+			cards[lcv];
+		}
+		
+        this.piles.push(pile);
     },
-    
-    _onCardActivated: function(eventData) {
-		var card = eventData;
-		var $c = $("<div class='card'></div>");
-		var $cback = $("<div class='back'></div>")
-			.appendTo($c);
-		var $cfront = $("<div class='front'></div>")
-			.appendTo($c);
+	
+	_createPileEl: function(pile) {
+		var $p = $("<div class='pile " + pile.type() + "'></div>")
+		.data({pile: pile})
+		.droppable({
+			drop: this._handleDropEvent
+		});
+		
+		pile.$el($p);
+		return $p;
+	},
+	
+	_handleDropEvent: function(event, ui) {
+		var $pile = $(event.target);
+		var $card = ui.draggable;
+		$card.removeAttr('style')
+		.appendTo($pile);
+	},
+	
+	_createCardEl: function(card) {
+		var $c = $("<div class='card'></div>")
+		.data({card: card});
+		
+		var $cback = $("<div class='back'></div>");
+		
+		var $cfront = $("<div class='front'></div>");
+		
 		var $cname = $("<div class='name'></div>")
 			.text(card.name())
 			.appendTo($cfront);
+			
+		$cfront.append($cname);
+		$c.append($cfront).append($cback);
 		
-		// TODO: Figure out a better way to get a reference to the containing pile.
-		for (var lcv = 0; lcv < this.piles.length; lcv++) {
-			// TODO: Remove ref to private Card _container prop.
-			if (eventData.container() === this.piles[lcv].pile) {
-				this.piles[lcv].$el.append($c);
-			}
-		}
+		$c.draggable( {
+			cursor: 'move',
+			snap: '#content'
+		});
 		
+		card.$el($c);
+		return $c;
+	},
+    
+    _onCardActivated: function(eventData) {
+		var card = eventData;
+		var $card = this._createCardEl(card);
+		card.container().$el().append($card);
     }
 });
 UIManager.ADD_PILE = "uiAddPile";

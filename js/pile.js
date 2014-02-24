@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------------
 var Pile = EventEmitter.extend({
 	
+	_$el: null,
 	_type: null,
 	_cards: null,
 	
@@ -11,6 +12,14 @@ var Pile = EventEmitter.extend({
 		this._cards = [];
 		
 		return this;
+	},
+	
+	$el: function(value) {
+		if (!!value) {
+			this._$el = value;
+			return this;
+		}
+		return this._$el;
 	},
 	
 	type: function(value) {

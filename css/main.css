@@ -64,7 +64,7 @@ body {
 
 .card {
     display: block; 
-    position: absolute;
+    position: relative;
     width: 135px;
     height: 210px;
     background: #4385a9;

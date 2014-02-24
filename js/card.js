@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------------
 var Card = EventEmitter.extend({
 	
+	_$el: null,
     _name: null,
     _description: null,
 	_data: null,
@@ -12,6 +13,14 @@ var Card = EventEmitter.extend({
 	init: function (cardData, owner) {
 		this._super();
 		return this;
+	},
+	
+	$el: function(value) {
+		if (!!value) {
+			this._$el = value;
+			return this;
+		}
+		return this._$el;
 	},
 	
 	name: function(value) {
@@ -77,5 +86,4 @@ var Card = EventEmitter.extend({
 /*
  * Define constants for Event types.
  */
-Card.CREATED = "cardCreated";
 Card.ACTIVATED = "cardActivated";
