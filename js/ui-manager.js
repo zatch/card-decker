@@ -69,18 +69,22 @@ var UIManager = EventEmitter.extend({
 		var $p = $("<div class='pile " + pile.type() + "'></div>")
 		.data({pile: pile})
 		.droppable({
-			drop: this._handleDropEvent
+			drop: this._handlePileDropEvent
 		});
 		
 		pile.$el($p);
 		return $p;
 	},
 	
-	_handleDropEvent: function(event, ui) {
+	_handlePileDropEvent: function(event, ui) {
 		var $pile = $(event.target);
 		var $card = ui.draggable;
-		$card.removeAttr('style')
-		.appendTo($pile);
+		$card.appendTo($pile);
+	},
+	
+	_handleCardStopDragEvent: function(event, ui) {
+		var $card = $(event.target);
+		$card.removeAttr('style');
 	},
 	
 	_createCardEl: function(card) {
@@ -100,7 +104,8 @@ var UIManager = EventEmitter.extend({
 		
 		$c.draggable( {
 			cursor: 'move',
-			snap: '#content'
+			snap: '#content',
+			stop: this._handleCardStopDragEvent
 		});
 		
 		card.$el($c);
