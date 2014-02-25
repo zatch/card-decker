@@ -40,9 +40,19 @@ body {
     float: left;
     margin: 10px;
 }
+.card {
+    display: inline-block; 
+    position: relative;
+    width: 135px;
+    height: 210px;
+    margin: 20px;
+    background: #4385a9;
+    border: 1px solid #333333;
+}
 
 .deck { 
-    float: left;
+    display: block;
+    position: absolute;
     width: 135px;
     height: 210px;
     margin: 20px;
@@ -51,24 +61,20 @@ body {
     cursor: pointer;
 }
 
-.mat { 
-    float: left;
-    min-width: 135px;
+.deck .card {
+    margin: 0;
+}
+
+.mat {
+    display: block;
+    position: absolute;
+    width: 135px;
     height: 210px;
     padding: 20px;
     margin: 20px;
     background: #cccccc;
     border: 1px solid #333333;
     cursor: pointer;
+    overflow: hidden;
+    overflow-x: scroll;
 }
-
-.card {
-    display: block; 
-    position: relative;
-    width: 135px;
-    height: 210px;
-    background: #4385a9;
-    border: 1px solid #333333;
-}
-
-

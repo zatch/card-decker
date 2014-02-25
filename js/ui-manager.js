@@ -72,6 +72,19 @@ var UIManager = EventEmitter.extend({
 			drop: this._handlePileDropEvent
 		});
 		
+		switch (pile.type()) {
+			case "deck":
+				break;
+			case "mat":
+				$p.resizable({handles: "se"})
+				.draggable({
+					start: this._handlePileStartDragEvent
+				});
+				break;
+			default:
+				break;
+		}
+		
 		pile.$el($p);
 		return $p;
 	},
@@ -80,6 +93,10 @@ var UIManager = EventEmitter.extend({
 		var $pile = $(event.target);
 		var $card = ui.draggable;
 		$card.appendTo($pile);
+	},
+	
+	_handlePileStartDragEvent: function(event, ui) {
+		
 	},
 	
 	_handleCardStopDragEvent: function(event, ui) {
