@@ -83,13 +83,17 @@ var UIManager = EventEmitter.extend({
 				$p.resizable({handles: "se"})
 				.draggable({
 					start: this._handlePileStartDragEvent,
-					appendTo: $("body"),
+					appendTo: document.body,
 					zIndex: 100,
-					accept: ".card",
 					cancel: ".card"
 				})
 				.sortable({
 					placeholder: "card-sort-placeholder",
+					appendTo: document.body,
+					helper: "clone",
+					connectWith: ".mat",
+					accept: ".card",
+					zIndex: 100,
 					stop: this._handlePileStopSortEvent
 				});
 				break;
@@ -146,9 +150,7 @@ var UIManager = EventEmitter.extend({
 		
 		$c.draggable( {
 			cursor: 'move',
-			snap: '#content',
-			/*appendTo: $("#piles-container"),
-			zIndex: 100,*/
+			zIndex: 100,
 			stop: this._handleCardStopDragEvent,
 			revert: "invalid",
 			revertDuration: 0,
