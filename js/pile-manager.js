@@ -34,6 +34,7 @@ var PileManager = EventEmitter.extend({
 		switch (data.type) {
             case "deck":
 				this._piles.push(newPile = new Deck()
+					.name(data.name)
 					.addCards(data.cards)
 					.shuffle()
 				);

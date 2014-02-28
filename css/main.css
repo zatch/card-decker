@@ -69,11 +69,18 @@ body {
     position: absolute;
 }
 
+.pile .pile-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 4px;
+}
+
 .deck { 
     display: block;
     position: absolute;
     width: 155px;
-    height: 230px;
+    height: 250px;
     margin: 10px;
     background: #cccccc;
     border: 1px solid #333333;
@@ -88,7 +95,7 @@ body {
     position: absolute;
     width: 155px;
     height: 250px;
-    padding: 10px;
+    padding: 0 0 15px 0;
     margin: 10px;
     background: #cccccc;
     border: 1px solid #333333;

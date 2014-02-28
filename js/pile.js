@@ -4,13 +4,14 @@
 var Pile = EventEmitter.extend({
 	
 	_$el: null,
+    _name: null,
 	_type: null,
 	_cards: null,
 	
 	init: function () {
 		this._super();
 		this._cards = [];
-		
+		this.name("Unnamed Mat");
 		return this;
 	},
 	
@@ -20,6 +21,14 @@ var Pile = EventEmitter.extend({
 			return this;
 		}
 		return this._$el;
+	},
+	
+	name: function(value) {
+		if (!!value) {
+			this._name = value;
+			return this;
+		}
+		return this._name;
 	},
 	
 	type: function(value) {

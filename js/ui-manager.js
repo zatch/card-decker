@@ -71,6 +71,7 @@ var UIManager = EventEmitter.extend({
 	
 	_createPileEl: function(pile) {
 		var $p = $("<div class='pile " + pile.type() + "'></div>")
+		.append("<div class='pile-name'>" + pile.name() + "</div>")
 		.data({pile: pile})
 		.draggable({
 			start: this._handlePileStartDragEvent,
