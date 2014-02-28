@@ -86,8 +86,13 @@ var TrelloIO = EventEmitter.extend({
                 cardSet.push(c);
             });
             
+			var pileData = {
+				name: list.name,
+				cards: cardSet
+			};
+			
             // Emit event.
-            self.trigger(TrelloIO.CARDS_READY, cardSet);
+            self.trigger(TrelloIO.CARDS_READY, pileData);
         });
     },
     

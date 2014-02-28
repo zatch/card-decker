@@ -41,40 +41,58 @@ body {
     margin: 10px;
 }
 .card {
-    display: inline-block; 
-    position: relative;
+    float: left;/*
+    display: inline-block;
+    position: relative; */
     width: 135px;
     height: 210px;
-    margin: 20px;
+    margin: 10px;
     background: #4385a9;
     border: 1px solid #333333;
+}
+
+.card-sort-placeholder {
+    float: left;/*
+    display: inline-block;
+    position: relative; */
+    width: 135px;
+    height: 210px;
+    margin: 10px;
+    background: #7f7f7f;
+}
+
+.pile {
+    
+}
+
+.pile .ui-resizable-handle {
+    position: absolute;
 }
 
 .deck { 
     display: block;
     position: absolute;
-    width: 135px;
-    height: 210px;
-    margin: 20px;
+    width: 155px;
+    height: 230px;
+    margin: 10px;
     background: #cccccc;
     border: 1px solid #333333;
     cursor: pointer;
 }
 
 .deck .card {
-    margin: 0;
 }
 
 .mat {
     display: block;
     position: absolute;
-    width: 135px;
-    height: 210px;
-    padding: 20px;
-    margin: 20px;
+    width: 155px;
+    height: 250px;
+    padding: 10px;
+    margin: 10px;
     background: #cccccc;
     border: 1px solid #333333;
     cursor: pointer;
-    overflow: hidden;
+    overflow-y: hidden;
     overflow-x: scroll;
 }

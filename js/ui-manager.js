@@ -17,7 +17,7 @@ var UIManager = EventEmitter.extend({
         this.$addMatBtn = $("#add-mat-btn");
         this.$pilesContainer = $("#piles-container");
 		
-        this.$addMatBtn.unbind("click").click(function() {
+		this.$addMatBtn.unbind("click").click(function() {
             self.trigger(UIManager.ADD_PILE, {type: "mat"});
         });
 	},
@@ -43,7 +43,8 @@ var UIManager = EventEmitter.extend({
         var self = this;
 		var pileData = {
 			type: "deck",
-			cards: eventData
+			name: eventData.name,
+			cards: eventData.cards
 		};
         this.$addDeckBtn.unbind("click").click(function() {
             self.trigger(UIManager.ADD_PILE, pileData);
@@ -68,9 +69,9 @@ var UIManager = EventEmitter.extend({
 	_createPileEl: function(pile) {
 		var $p = $("<div class='pile " + pile.type() + "'></div>")
 		.data({pile: pile})
-		.droppable({
+		/*.droppable({
 			drop: this._handlePileDropEvent
-		});
+		})*/;
 		
 		switch (pile.type()) {
 			case "deck":
@@ -78,7 +79,15 @@ var UIManager = EventEmitter.extend({
 			case "mat":
 				$p.resizable({handles: "se"})
 				.draggable({
-					start: this._handlePileStartDragEvent
+					start: this._handlePileStartDragEvent,
+					appendTo: $("body"),
+					zIndex: 100,
+					accept: ".card",
+					cancel: ".card"
+				})
+				.sortable({
+					placeholder: "card-sort-placeholder",
+					stop: this._handlePileStopSortEvent
 				});
 				break;
 			default:
@@ -90,9 +99,18 @@ var UIManager = EventEmitter.extend({
 	},
 	
 	_handlePileDropEvent: function(event, ui) {
-		var $pile = $(event.target);
+		/*var $pile = $(event.target);
 		var $card = ui.draggable;
-		$card.appendTo($pile);
+		if ($card.data()["card"] instanceof Card) {
+			//$card.appendTo($pile);
+		}*/
+	},
+	
+	_handlePileStopSortEvent: function(event, ui) {
+		//console.log(event);
+		/*var $card = ui.item;
+		console.log($card.data());
+		$card.removeAttr('style');*/
 	},
 	
 	_handlePileStartDragEvent: function(event, ui) {
@@ -100,8 +118,12 @@ var UIManager = EventEmitter.extend({
 	},
 	
 	_handleCardStopDragEvent: function(event, ui) {
+		var $clone = $(ui.helper);
+		console.log($clone);
 		var $card = $(event.target);
-		$card.removeAttr('style');
+		console.log($card);
+		$card.insertAfter($clone);
+		//$card.removeAttr('style');
 	},
 	
 	_createCardEl: function(card) {
@@ -122,7 +144,13 @@ var UIManager = EventEmitter.extend({
 		$c.draggable( {
 			cursor: 'move',
 			snap: '#content',
-			stop: this._handleCardStopDragEvent
+			/*appendTo: $("#piles-container"),
+			zIndex: 100,*/
+			stop: this._handleCardStopDragEvent,
+			revert: "invalid",
+			revertDuration: 0,
+			helper: "clone",
+			connectToSortable: ".pile"
 		});
 		
 		card.$el($c);
