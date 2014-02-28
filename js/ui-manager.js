@@ -72,21 +72,18 @@ var UIManager = EventEmitter.extend({
 	_createPileEl: function(pile) {
 		var $p = $("<div class='pile " + pile.type() + "'></div>")
 		.data({pile: pile})
-		/*.droppable({
-			drop: this._handlePileDropEvent
-		})*/;
+		.draggable({
+			start: this._handlePileStartDragEvent,
+			appendTo: document.body,
+			zIndex: 100,
+			cancel: ".card"
+		});
 		
 		switch (pile.type()) {
 			case "deck":
 				break;
 			case "mat":
 				$p.resizable({handles: "se"})
-				.draggable({
-					start: this._handlePileStartDragEvent,
-					appendTo: document.body,
-					zIndex: 100,
-					cancel: ".card"
-				})
 				.sortable({
 					placeholder: "card-sort-placeholder",
 					appendTo: document.body,
