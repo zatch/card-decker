@@ -71,11 +71,6 @@ var UIManager = EventEmitter.extend({
 				break;
 		}
 		
-		var cards = pile.getCards();
-		for (var lcv = 0; lcv < cards.length; lcv++) {
-			cards[lcv];
-		}
-		
         this.piles.push(pile);
     },
 	
@@ -84,7 +79,6 @@ var UIManager = EventEmitter.extend({
 		.append("<div class='pile-name'>" + pile.name() + "</div>")
 		.data({pile: pile})
 		.draggable({
-			start: this._handlePileStartDragEvent,
 			appendTo: document.body,
 			zIndex: 100,
 			cancel: ".card"
@@ -115,18 +109,11 @@ var UIManager = EventEmitter.extend({
 		return $p;
 	},
 	
-	_handlePileDropEvent: function(event, ui) {
-		
-	},
 	_handlePileReceiveSortEvent: function(event, ui) {
 		
 	},
 	
 	_handlePileStopSortEvent: function(event, ui) {
-		
-	},
-	
-	_handlePileStartDragEvent: function(event, ui) {
 		
 	},
 	
