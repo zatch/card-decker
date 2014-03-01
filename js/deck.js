@@ -13,7 +13,7 @@ var Deck = Pile.extend({
 	},
 	
 	activateNextCard: function() {
-		this._activateCard(this.nextCard());
+		this._activateCard(this._cardsInDeck.pop());
 	},
 	
 	nextCard: function() {

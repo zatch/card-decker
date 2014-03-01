@@ -135,11 +135,28 @@ var UIManager = EventEmitter.extend({
 	},
 	
 	_handlePileReceiveSortEvent: function(event, ui) {
+		var $card = ui.item;
+		var card = $card.data().card;
 		
+		var $oldPile = ui.sender;
+		var oldPile = $oldPile.data().pile;
+		
+		var $newPile = $(event.target);
+		var newPile = $newPile.data().pile;
+		
+		switch (oldPile.type()) {
+			case "deck":
+				oldPile.activateNextCard();
+				break;
+			case "mat":
+				break;
+			default:
+				break;
+		}
 	},
 	
 	_handlePileStopSortEvent: function(event, ui) {
-		
+		console.log("stop");
 	}
 });
 UIManager.ADD_PILE = "uiAddPile";
