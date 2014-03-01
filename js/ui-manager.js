@@ -122,23 +122,24 @@ var UIManager = EventEmitter.extend({
 	},
 	
 	_handlePileStopSortEvent: function(event, ui) {
-		//console.log(event);
-		/*var $card = ui.item;
-		console.log($card.data());
-		$card.removeAttr('style');*/
+		var $card = ui.item;
+		$card.removeClass("card-drag-placeholder");
 	},
 	
 	_handlePileStartDragEvent: function(event, ui) {
 		
 	},
 	
+	_handleCardStartDragEvent: function(event, ui) {
+		var $card = $(event.target);
+		$card.addClass("card-drag-placeholder");
+	},
+	
 	_handleCardStopDragEvent: function(event, ui) {
 		var $clone = $(ui.helper);
-		console.log($clone);
 		var $card = $(event.target);
-		console.log($card);
-		$card.insertAfter($clone);
-		//$card.removeAttr('style');
+		$card.removeClass("card-drag-placeholder")
+			 .insertAfter($clone);
 	},
 	
 	_createCardEl: function(card) {
@@ -160,6 +161,7 @@ var UIManager = EventEmitter.extend({
 			cursor: 'move',
 			zIndex: 100,
 			stop: this._handleCardStopDragEvent,
+			start: this._handleCardStartDragEvent,
 			revert: "invalid",
 			revertDuration: 0,
 			helper: "clone",

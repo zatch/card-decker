@@ -40,25 +40,30 @@ body {
     float: left;
     margin: 10px;
 }
+
 .card {
-    float: left;/*
-    display: inline-block;
-    position: relative; */
+    float: left;
     width: 135px;
     height: 210px;
     margin: 10px;
     background: #4385a9;
     border: 1px solid #333333;
 }
+.card.card-drag-placeholder {
+    background: #7f7f7f;
+    border: 1px solid #7f7f7f;
+}
+.card.card-drag-placeholder * {
+    display: none;
+}
 
 .card-sort-placeholder {
-    float: left;/*
-    display: inline-block;
-    position: relative; */
+    float: left;
     width: 135px;
     height: 210px;
     margin: 10px;
     background: #7f7f7f;
+    border: 1px solid #7f7f7f;
 }
 
 .pile {
