@@ -76,18 +76,21 @@ var UIManager = EventEmitter.extend({
 	
 	_createPileEl: function(pile) {
 		var $p = $("<div class='pile " + pile.type() + "'></div>")
-		.append("<div class='pile-name'>" + pile.name() + "</div>")
 		.data({pile: pile})
 		.draggable({
 			appendTo: document.body,
 			zIndex: 100,
 			cancel: ".card"
-		})
+		});
+		
+		var $pName = $("<div class='pile-name'>" + pile.name() + "</div>");
+		
+		var $cardContainer = $("<div class='card-container'></div>")
 		.sortable({
 			placeholder: "card-sort-placeholder",
 			appendTo: document.body,
 			helper: "clone",
-			connectWith: ".pile:not(.deck)",
+			connectWith: ".pile:not(.deck) .card-container",
 			items: ".card",
 			accept: ".card",
 			zIndex: 100,
@@ -99,11 +102,14 @@ var UIManager = EventEmitter.extend({
 			case "deck":
 				break;
 			case "mat":
-				$p.resizable({handles: "se"});
+				$p.resizable({handles: "e"});
 				break;
 			default:
 				break;
 		}
+		
+		$p.append($pName)
+		.append($cardContainer);
 		
 		pile.$el($p);
 		return $p;
@@ -112,7 +118,7 @@ var UIManager = EventEmitter.extend({
     _onCardActivated: function(eventData) {
 		var card = eventData;
 		var $card = this._createCardEl(card);
-		card.container().$el().append($card);
+		$card.appendTo($(".card-container", card.container().$el()));
     },
 	
 	_createCardEl: function(card) {
@@ -139,10 +145,10 @@ var UIManager = EventEmitter.extend({
 		var card = $card.data().card;
 		
 		var $oldPile = ui.sender;
-		var oldPile = $oldPile.data().pile;
+		var oldPile = $oldPile.parent().data().pile;
 		
 		var $newPile = $(event.target);
-		var newPile = $newPile.data().pile;
+		var newPile = $newPile.parent().data().pile;
 		
 		switch (oldPile.type()) {
 			case "deck":

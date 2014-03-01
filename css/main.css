@@ -42,23 +42,18 @@ body {
 }
 
 .card {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     width: 135px;
     height: 210px;
     margin: 10px;
     background: #4385a9;
     border: 1px solid #333333;
 }
-.card.card-drag-placeholder {
-    background: #7f7f7f;
-    border: 1px solid #7f7f7f;
-}
-.card.card-drag-placeholder * {
-    display: none;
-}
 
 .card-sort-placeholder {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     width: 135px;
     height: 210px;
     margin: 10px;
@@ -67,7 +62,13 @@ body {
 }
 
 .pile {
-    
+    display: block;
+    top: 0;
+    left: 0;
+    position: absolute;
+    min-width: 155px;
+    min-height: 250px;
+    margin: 10px;
 }
 
 .pile .ui-resizable-handle {
@@ -81,12 +82,17 @@ body {
     margin: 4px;
 }
 
-.deck { 
-    display: block;
+.pile .card-container {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.deck {
     width: 155px;
     height: 250px;
-    margin: 10px;
     background: #cccccc;
     border: 1px solid #333333;
     cursor: pointer;
@@ -96,15 +102,20 @@ body {
 }
 
 .mat {
-    display: block;
-    position: absolute;
-    width: 155px;
+    width: 600px;
     height: 250px;
     padding: 0 0 15px 0;
-    margin: 10px;
     background: #cccccc;
     border: 1px solid #333333;
     cursor: pointer;
-    overflow-y: hidden;
+}
+
+.mat .pile-name {
+    bottom: 15px;
+}
+
+.mat .card-container {
+    overflow: hidden;
     overflow-x: scroll;
+    white-space: nowrap;
 }
