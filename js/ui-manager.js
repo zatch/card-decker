@@ -88,22 +88,24 @@ var UIManager = EventEmitter.extend({
 			appendTo: document.body,
 			zIndex: 100,
 			cancel: ".card"
+		})
+		.sortable({
+			placeholder: "card-sort-placeholder",
+			appendTo: document.body,
+			helper: "clone",
+			connectWith: ".pile:not(.deck)",
+			items: ".card",
+			accept: ".card",
+			zIndex: 100,
+			stop: this._handlePileStopSortEvent,
+			receive: this._handlePileReceiveSortEvent
 		});
 		
 		switch (pile.type()) {
 			case "deck":
 				break;
 			case "mat":
-				$p.resizable({handles: "se"})
-				.sortable({
-					placeholder: "card-sort-placeholder",
-					appendTo: document.body,
-					helper: "clone",
-					connectWith: ".mat",
-					accept: ".card",
-					zIndex: 100,
-					stop: this._handlePileStopSortEvent
-				});
+				$p.resizable({handles: "se"});
 				break;
 			default:
 				break;
@@ -114,32 +116,18 @@ var UIManager = EventEmitter.extend({
 	},
 	
 	_handlePileDropEvent: function(event, ui) {
-		/*var $pile = $(event.target);
-		var $card = ui.draggable;
-		if ($card.data()["card"] instanceof Card) {
-			//$card.appendTo($pile);
-		}*/
+		
+	},
+	_handlePileReceiveSortEvent: function(event, ui) {
+		
 	},
 	
 	_handlePileStopSortEvent: function(event, ui) {
-		var $card = ui.item;
-		$card.removeClass("card-drag-placeholder");
+		
 	},
 	
 	_handlePileStartDragEvent: function(event, ui) {
 		
-	},
-	
-	_handleCardStartDragEvent: function(event, ui) {
-		var $card = $(event.target);
-		$card.addClass("card-drag-placeholder");
-	},
-	
-	_handleCardStopDragEvent: function(event, ui) {
-		var $clone = $(ui.helper);
-		var $card = $(event.target);
-		$card.removeClass("card-drag-placeholder")
-			 .insertAfter($clone);
 	},
 	
 	_createCardEl: function(card) {
@@ -156,17 +144,6 @@ var UIManager = EventEmitter.extend({
 			
 		$cfront.append($cname);
 		$c.append($cfront).append($cback);
-		
-		$c.draggable( {
-			cursor: 'move',
-			zIndex: 100,
-			stop: this._handleCardStopDragEvent,
-			start: this._handleCardStartDragEvent,
-			revert: "invalid",
-			revertDuration: 0,
-			helper: "clone",
-			connectToSortable: ".pile"
-		});
 		
 		card.$el($c);
 		return $c;
