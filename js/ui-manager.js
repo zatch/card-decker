@@ -61,6 +61,16 @@ var UIManager = EventEmitter.extend({
 		
 		pile.bind(Card.ACTIVATED, $.proxy(this.handleEvent, this));
 		
+		switch (pile.type()) {
+			case "deck":
+				pile.activateNextCard();
+				break;
+			case "mat":
+				break;
+			default:
+				break;
+		}
+		
 		var cards = pile.getCards();
 		for (var lcv = 0; lcv < cards.length; lcv++) {
 			cards[lcv];
