@@ -108,14 +108,12 @@ var UIManager = EventEmitter.extend({
 		pile.$el($p);
 		return $p;
 	},
-	
-	_handlePileReceiveSortEvent: function(event, ui) {
-		
-	},
-	
-	_handlePileStopSortEvent: function(event, ui) {
-		
-	},
+    
+    _onCardActivated: function(eventData) {
+		var card = eventData;
+		var $card = this._createCardEl(card);
+		card.container().$el().append($card);
+    },
 	
 	_createCardEl: function(card) {
 		var $c = $("<div class='card'></div>")
@@ -135,11 +133,13 @@ var UIManager = EventEmitter.extend({
 		card.$el($c);
 		return $c;
 	},
-    
-    _onCardActivated: function(eventData) {
-		var card = eventData;
-		var $card = this._createCardEl(card);
-		card.container().$el().append($card);
-    }
+	
+	_handlePileReceiveSortEvent: function(event, ui) {
+		
+	},
+	
+	_handlePileStopSortEvent: function(event, ui) {
+		
+	}
 });
 UIManager.ADD_PILE = "uiAddPile";
