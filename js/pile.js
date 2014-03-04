@@ -11,7 +11,6 @@ var Pile = EventEmitter.extend({
 	init: function () {
 		this._super();
 		this._cards = [];
-		this.name("Unnamed Mat");
 		return this;
 	},
 	

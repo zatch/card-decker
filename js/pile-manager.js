@@ -39,8 +39,7 @@ var PileManager = EventEmitter.extend({
 					.shuffle()
 				);
 				this.trigger(PileManager.PILE_CREATED, this._piles[this._piles.length - 1]);
-				//newPile.activate();
-                break;
+				break;
             case "mat":
 				this._piles.push(newPile = new Mat());
 				this.trigger(PileManager.PILE_CREATED, this._piles[this._piles.length - 1]);

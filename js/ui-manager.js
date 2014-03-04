@@ -130,8 +130,7 @@ var UIManager = EventEmitter.extend({
 		var $cfront = $("<div class='front'></div>");
 		
 		var $cname = $("<div class='name'></div>")
-			.text(card.name())
-			.appendTo($cfront);
+			.text(card.name());
 			
 		$cfront.append($cname);
 		$c.append($cfront).append($cback);
@@ -162,7 +161,7 @@ var UIManager = EventEmitter.extend({
 	},
 	
 	_handlePileStopSortEvent: function(event, ui) {
-		console.log("stop");
+		
 	}
 });
 UIManager.ADD_PILE = "uiAddPile";

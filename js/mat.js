@@ -8,6 +8,7 @@ var Mat = Pile.extend({
 	init: function () {
 		this._super();
 		this.type("mat");
+		this.name("Unnamed Mat");
 	},
 	
 	activate: function() {
