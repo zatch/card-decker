@@ -149,6 +149,10 @@ var UIManager = EventEmitter.extend({
 		var $newPile = $(event.target);
 		var newPile = $newPile.parent().data().pile;
 		
+		// Handle Card and Pile updates.
+		card.container(newPile);
+		
+		// Handle updates for specific Pile types.
 		switch (oldPile.type()) {
 			case "deck":
 				oldPile.activateNextCard();

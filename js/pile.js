@@ -54,6 +54,7 @@ var Pile = EventEmitter.extend({
 					.name(c.name)
 					.description(c.desc)
 					.data(c.data)
+					.container(this)
 					.owner(this)
 				);
 			}
