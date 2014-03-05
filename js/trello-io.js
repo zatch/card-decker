@@ -85,12 +85,9 @@ var TrelloIO = EventEmitter.extend({
                     }
                 }
 				
-				console.log(card.idAttachmentCover);
 				for (var lcv = 0; lcv < card.attachments.length; lcv++) {
-					console.log(card.attachments[lcv]);
 					if (card.attachments[lcv].id === card.idAttachmentCover) {
 						c.cover = card.attachments[lcv].url;
-						console.log(c.cover);
 					}
 				}
                 
