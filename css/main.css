@@ -49,6 +49,35 @@ body {
     margin: 10px;
     background: #4385a9;
     border: 1px solid #333333;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 0.5s linear;
+    -webkit-transition: -webkit-transform 0.5s linear;
+    transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+}
+
+.card.face-up {
+    transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+}
+
+.card .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.card .face.back {
+    background: #4385a9;
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.card .face.front {
+    background: #7c8a62;
 }
 
 .card-sort-placeholder {

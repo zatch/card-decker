@@ -123,17 +123,20 @@ var UIManager = EventEmitter.extend({
 	
 	_createCardEl: function(card) {
 		var $c = $("<div class='card'></div>")
-		.data({card: card});
+		.data({card: card})
+		.click(function() {
+			$(this).toggleClass("face-up");
+		});
 		
-		var $cback = $("<div class='back'></div>");
+		var $cback = $("<div class='back face'></div>");
 		
-		var $cfront = $("<div class='front'></div>");
+		var $cfront = $("<div class='front face'></div>");
 		
 		var $cname = $("<div class='name'></div>")
 			.text(card.name());
 			
 		$cfront.append($cname);
-		$c.append($cfront).append($cback);
+		$c.append($cback).append($cfront);
 		
 		card.$el($c);
 		return $c;
