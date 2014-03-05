@@ -42,6 +42,7 @@ var Pile = EventEmitter.extend({
 		for (var lcv = 0; lcv < cards.length; lcv++) {
 			var c = cards[lcv];
 			c.name = c.name ? c.name : "[no name]";
+			c.cover = c.cover ? c.cover : "[no cover]";
 			c.desc = c.desc ? c.desc : "[no description]";
 			c.data = c.data ? c.data : {};
 			var cf = c.data.frequency ? c.data.frequency : 1;
@@ -52,6 +53,7 @@ var Pile = EventEmitter.extend({
 					new Card()
 					.bind(Card.ACTIVATED, $.proxy(this.handleEvent, this))
 					.name(c.name)
+					.cover(c.cover)
 					.description(c.desc)
 					.data(c.data)
 					.container(this)

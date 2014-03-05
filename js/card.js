@@ -5,6 +5,7 @@ var Card = EventEmitter.extend({
 	
 	_$el: null,
     _name: null,
+	_cover: null,
     _description: null,
 	_data: null,
 	_owner: null,
@@ -29,6 +30,14 @@ var Card = EventEmitter.extend({
 			return this;
 		}
 		return this._name;
+	},
+	
+	cover: function(value) {
+		if (!!value) {
+			this._cover = value;
+			return this;
+		}
+		return this._cover;
 	},
 	
 	description: function(value) {

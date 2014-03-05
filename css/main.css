@@ -80,6 +80,13 @@ body {
     background: #7c8a62;
 }
 
+.card .cover {
+    display: block;
+    width: 125px;
+    height: 100px;
+    padding: 5px;
+}
+
 .card-sort-placeholder {
     display: inline-block;
     vertical-align: top;

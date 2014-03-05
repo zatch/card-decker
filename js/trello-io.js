@@ -56,10 +56,18 @@ var TrelloIO = EventEmitter.extend({
         // Output a list of all of the cards that the member 
         // is assigned to
         var uri = "/lists/" + list.id + "/cards";
-        Trello.get(uri, {"checklists": "all"}, function(cards) {
+        Trello.get(uri, {"checklists": "all",
+						 "attachments": true}, function(cards) {
             
             $.each(cards, function(ix, card) {
-                var cardData = {};
+				
+                var c = {
+                    name: card.name,
+                    desc: card.desc,
+                    data: {},
+					cover: ""
+                };
+				
                 for (var lcv = 0; lcv < card.checklists.length; lcv++) {
                     var list = card.checklists[lcv];
                     if (list.name === "data") {
@@ -70,18 +78,21 @@ var TrelloIO = EventEmitter.extend({
                             if (itemPair.length === 2) {
                                 var itemKey = itemPair[0].trim();
                                 var itemVal = itemPair[1].trim();
-                                cardData[itemKey] = itemVal;
+                                c.data[itemKey] = itemVal;
                             }
                         }
                         break;
                     }
                 }
-                
-                var c = {
-                    name: card.name,
-                    desc: card.desc,
-                    data: cardData
-                };
+				
+				console.log(card.idAttachmentCover);
+				for (var lcv = 0; lcv < card.attachments.length; lcv++) {
+					console.log(card.attachments[lcv]);
+					if (card.attachments[lcv].id === card.idAttachmentCover) {
+						c.cover = card.attachments[lcv].url;
+						console.log(c.cover);
+					}
+				}
                 
                 cardSet.push(c);
             });

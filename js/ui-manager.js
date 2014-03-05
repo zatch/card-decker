@@ -128,15 +128,17 @@ var UIManager = EventEmitter.extend({
 			$(this).toggleClass("face-up");
 		});
 		
-		var $cback = $("<div class='back face'></div>");
+		var $cBack = $("<div class='back face'></div>");
 		
-		var $cfront = $("<div class='front face'></div>");
+		var $cFront = $("<div class='front face'></div>");
 		
-		var $cname = $("<div class='name'></div>")
+		var $cName = $("<div class='name'></div>")
 			.text(card.name());
 			
-		$cfront.append($cname);
-		$c.append($cback).append($cfront);
+		var $cCover = $("<img class='cover' alt='card art' src='" + card.cover() + "'/>");
+			
+		$cFront.append($cName).append($cCover);
+		$c.append($cBack).append($cFront);
 		
 		card.$el($c);
 		return $c;
