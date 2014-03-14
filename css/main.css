@@ -41,9 +41,66 @@ body {
     margin: 10px;
 }
 
-.card {
+.card-wrapper {
     display: inline-block;
     vertical-align: top;
+}
+
+.card-wrapper .card-overlay {
+    display: none;
+    position: absolute;
+    width: 135px;
+    height: 210px;
+    padding: 4px 2px;
+    margin-left: -1px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.card-wrapper:hover .card-overlay {
+    display: block;
+}
+
+.card-wrapper.face-up .card-overlay {
+    margin: 0 -2px;
+    transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+}
+
+.card-overlay .card-btn {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin: 0 0 0 1px;
+    background-image: url(../img/card-options-overlay.png);
+}
+
+.card-btn.card-btn-flip {
+    background-position: -2px -4px;
+ }
+
+.card-btn.card-btn-tap {
+    background-position: -35px -4px;
+ }
+
+.card-btn.card-btn-blank {
+    background-position: -68px -4px;
+ }
+
+.card-btn.card-btn-menu {
+    background-position: -101px -4px;
+ }
+
+.card-btn.card-btn-move {
+    display: block;
+    width: 130px;
+    height: 168px;
+    background-position: -2px -37px;
+ }
+
+.card {
     width: 135px;
     height: 210px;
     margin: 10px;
@@ -57,7 +114,7 @@ body {
     -webkit-transform: rotateY(-180deg);
 }
 
-.card.face-up {
+.card-wrapper.face-up .card {
     transform: rotateY(0deg);
     -webkit-transform: rotateY(0deg);
 }

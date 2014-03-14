@@ -81,7 +81,7 @@ var UIManager = EventEmitter.extend({
 		.draggable({
 			appendTo: document.body,
 			zIndex: 100,
-			cancel: ".card"
+			cancel: ".card-wrapper"
 		});
 		
 		var $pName = $("<div class='pile-name'>" + pile.name() + "</div>");
@@ -91,9 +91,10 @@ var UIManager = EventEmitter.extend({
 			placeholder: "card-sort-placeholder",
 			appendTo: document.body,
 			helper: "clone",
+			handle: ".card-btn-move",
 			connectWith: ".pile:not(.deck) .card-container",
-			items: ".card",
-			accept: ".card",
+			items: ".card-wrapper",
+			accept: ".card-wrapper",
 			zIndex: 100,
 			stop: this._handlePileStopSortEvent,
 			receive: this._handlePileReceiveSortEvent
@@ -123,11 +124,10 @@ var UIManager = EventEmitter.extend({
     },
 	
 	_createCardEl: function(card) {
-		var $c = $("<div class='card'></div>")
-		.data({card: card})
-		.click(function() {
-			$(this).toggleClass("face-up");
-		});
+		var $cWrapper = $("<div class='card-wrapper'></div>")
+		.data({card: card});
+		
+		var $c = $("<div class='card'></div>");
 		
 		var $cBack = $("<div class='back face'></div>");
 		
@@ -137,12 +137,28 @@ var UIManager = EventEmitter.extend({
 			.text(card.name());
 			
 		var $cCover = $("<img class='cover' alt='card art' src='" + card.cover() + "'/>");
-			
-		$cFront.append($cName).append($cCover);
-		$c.append($cBack).append($cFront);
 		
-		card.$el($c);
-		return $c;
+		
+		var $cOverlay = $("<div class='card-overlay'></div>");
+		
+		$("<div class='card-btn card-btn-flip'></div>")
+		.appendTo($cOverlay)
+		.click(function() {
+			$cWrapper.toggleClass("face-up");
+		});
+		
+		$("<div class='card-btn card-btn-tap'></div>").appendTo($cOverlay);
+		$("<div class='card-btn card-btn-blank'></div>").appendTo($cOverlay);
+		$("<div class='card-btn card-btn-menu'></div>").appendTo($cOverlay);
+		$("<div class='card-btn card-btn-move'></div>").appendTo($cOverlay);
+		
+		
+		$cFront.append($cName).append($cCover);
+		$c.append($cBack).append($cFront).append($cOverlay);
+		$cWrapper.append($c);
+		
+		card.$el($cWrapper);
+		return $cWrapper;
 	},
 	
 	_handlePileReceiveSortEvent: function(event, ui) {
