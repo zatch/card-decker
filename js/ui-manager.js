@@ -91,7 +91,7 @@ var UIManager = EventEmitter.extend({
 			placeholder: "card-sort-placeholder",
 			appendTo: document.body,
 			helper: "clone",
-			handle: ".card-btn-move",
+			handle: ".card",
 			connectWith: ".pile:not(.deck) .card-container",
 			items: ".card-wrapper",
 			accept: ".card-wrapper",
@@ -144,16 +144,16 @@ var UIManager = EventEmitter.extend({
 		
 		var $cOverlay = $("<div class='card-overlay'></div>");
 		
-		$("<div class='card-btn card-btn-flip'></div>")
+		$("<div class='card-btn card-btn-flip'></div>\n")
 		.appendTo($cOverlay)
 		.click(function() {
 			$cWrapper.toggleClass("face-up");
 		});
 		
-		$("<div class='card-btn card-btn-tap'></div>").appendTo($cOverlay);
-		$("<div class='card-btn card-btn-blank'></div>").appendTo($cOverlay);
-		$("<div class='card-btn card-btn-menu'></div>").appendTo($cOverlay);
-		$("<div class='card-btn card-btn-move'></div>").appendTo($cOverlay);
+		$("<div class='card-btn card-btn-menu'></div>\n").appendTo($cOverlay);
+		$("<div class='card-btn card-btn-tap'></div>\n").appendTo($cOverlay);
+		$("<div class='card-btn card-btn-blank'></div>\n").appendTo($cOverlay);
+		//$("<div class='card-btn card-btn-move'></div>").appendTo($cOverlay);
 		
 		
 		$cFront		.append($cName)

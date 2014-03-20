@@ -49,48 +49,50 @@ body {
 .card-wrapper .card-overlay {
     display: none;
     position: absolute;
-    width: 135px;
-    height: 210px;
-    padding: 4px 2px;
-    margin-left: -1px;
+    width: 125px;
+    height: 80px;
+    margin: 14px 5px;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
+    transform: rotateY(181deg);
+    -webkit-transform: rotateY(181deg);
 }
 
 .card-wrapper:hover .card-overlay {
+    white-space: normal;
     display: block;
 }
 
 .card-wrapper.face-up .card-overlay {
-    margin: 0 -2px;
     transform: rotateY(0deg);
     -webkit-transform: rotateY(0deg);
 }
 
 .card-overlay .card-btn {
     display: inline-block;
-    width: 32px;
-    height: 32px;
-    margin: 0 0 0 1px;
-    background-image: url(../img/card-options-overlay.png);
+    width: 50px;
+    height: 30px;
+    margin: 5px 5px 0;
+    background-color: #191919;
+    background-repeat: no-repeat;
+    border: 1px solid #cdcdcd;
+    opacity: .5;
+    white-space: normal;
 }
 
 .card-btn.card-btn-flip {
-    background-position: -2px -4px;
- }
-
-.card-btn.card-btn-tap {
-    background-position: -35px -4px;
- }
-
-.card-btn.card-btn-blank {
-    background-position: -68px -4px;
+    background: url(../img/card-btn-flip.png) #191919 no-repeat center;
  }
 
 .card-btn.card-btn-menu {
-    background-position: -101px -4px;
+    background: url(../img/card-btn-menu.png) #191919 no-repeat center;
+ }
+ 
+.card-btn.card-btn-tap {
+    background: url(../img/card-btn-tap.png) #191919 no-repeat center;
+ }
+
+.card-btn.card-btn-blank {
  }
 
 .card-btn.card-btn-move {
