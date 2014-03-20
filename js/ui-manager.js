@@ -136,9 +136,39 @@ var UIManager = EventEmitter.extend({
 		var $cName = $("<div class='name'></div>")
 			.text(card.name());
 		
-		var $cDescription = $("<div class='description'></div>")
-			.text(card.description());
-			
+		var $cDescription = $("<div class='description'></div>");
+		var cData = card.data();
+		for (var key in cData) {
+			var val = cData[key];
+			switch (key) {
+				case "Defense":
+					$cDescription.append("<div class='defense'><strong>Defense:</strong> " + val + "</div>");
+					break;
+				case "Attack":
+					$cDescription.append("<div class='attack'><strong>Attack:</strong> " + val + "</div>");
+					break;
+				case "Type":
+					$cDescription.append("<div class='type'><strong>Type:</strong> " + val + "</div>");
+					break;
+				case "Spirit Points":
+					$cDescription.append("<div class='type'><strong>SP:</strong> " + val + "</div>");
+					break;
+				case "Wound Track":
+					$cDescription.append("<div class='type'><strong>WT:</strong> " + val + "</div>");
+					break;
+				case "Passive":
+					$cDescription.append("<div class='type'><strong>Passive:</strong> " + val + "</div>");
+					break;
+				case "Activated":
+					$cDescription.append("<div class='type'><strong>Activated:</strong> " + val + "</div>");
+					break;
+				default:
+					break;
+				//case
+			}
+		}
+		$cDescription.append(card.description());
+		
 		var $cCover = $("<img class='cover' alt='card art' src='" + card.cover() + "'/>");
 		
 		
