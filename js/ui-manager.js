@@ -135,6 +135,9 @@ var UIManager = EventEmitter.extend({
 		
 		var $cName = $("<div class='name'></div>")
 			.text(card.name());
+		
+		var $cDescription = $("<div class='description'></div>")
+			.text(card.description());
 			
 		var $cCover = $("<img class='cover' alt='card art' src='" + card.cover() + "'/>");
 		
@@ -153,9 +156,15 @@ var UIManager = EventEmitter.extend({
 		$("<div class='card-btn card-btn-move'></div>").appendTo($cOverlay);
 		
 		
-		$cFront.append($cName).append($cCover);
-		$c.append($cBack).append($cFront).append($cOverlay);
-		$cWrapper.append($c);
+		$cFront		.append($cName)
+					.append($cCover)
+					.append($cDescription);
+					
+		$c			.append($cBack)
+					.append($cFront)
+					.append($cOverlay);
+					
+		$cWrapper	.append($c);
 		
 		card.$el($cWrapper);
 		return $cWrapper;
